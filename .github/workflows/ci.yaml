@@ -8,24 +8,24 @@ on:
       branches:
       - main
 
-  jobs:
+jobs:
 
-    lint:
-      name: Lint 
-      runs-on: ubuntu-latest
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  lint:
+    name: Lint 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - uses: Roblox/setup-foreman@v1
-        name: Install Foreman 
-        with: 
-            version: "^1.1.0"
-            token: ${{ SECRETS.GITHUB.TOKEN }}
+    - uses: Roblox/setup-foreman@v1
+      name: Install Foreman 
+      with: 
+          version: "^1.1.0"
+          token: ${{ SECRETS.GITHUB.TOKEN }}
 
-      - name: Lint 
-        run: |
-          selene ./src
+    - name: Lint 
+      run: |
+        selene ./src
 
   style:
     name: Styling
@@ -36,4 +36,3 @@ on:
       with:
           token: ${{ secrets.GITHUB.TOKEN }}
           args: --check .
-          
