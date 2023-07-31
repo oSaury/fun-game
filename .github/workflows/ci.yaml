@@ -1,29 +1,29 @@
 name: CI
 
-on: 
+on:
   push:
     branches:
-      - main
-    pull_request:
-      branches:
-      - main
+    - master
+  pull_request:
+    branches:
+    - master
 
 jobs:
 
   lint:
-    name: Lint 
+    name: Lint
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - uses: Roblox/setup-foreman@v1
-      name: Install Foreman 
-      with: 
-          version: "^1.0.0"
-          token: ${{ SECRETS.GITHUB.TOKEN }}
+      name: Install Foreman
+      with:
+          version: "^v1.0.0"
+          token: ${{ SECRETS.GITHUB_TOKEN }}
 
-    - name: Lint 
+    - name: Lint
       run: |
         selene ./src
 
@@ -32,7 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: JohnnyMorganz/stylua-action@1.0.0
+    - name: StyLua
+      uses: JohnnyMorganz/stylua-action@v3
       with:
-          token: ${{ secrets.GITHUB.TOKEN }}
-          args: --check .
+        token: ${{ secrets.GITHUB_TOKEN }}
+        version: latest
+        args: --check .
+        
