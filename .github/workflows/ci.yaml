@@ -36,3 +36,4 @@ on:
       with:
           token: ${{ secrets.GITHUB.TOKEN }}
           args: --check .
+          
